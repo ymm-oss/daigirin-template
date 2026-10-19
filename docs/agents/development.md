@@ -87,6 +87,11 @@ PDF を作る仕組み（`scripts/`、`book/theme/`、`book/*.config.js`、`.git
 - キャッシュのキーには、出力の互換性を左右する値（ツールチェーンのバージョン、依存のロックファイル、関連するスクリプトなど）をすべて含める。
 - runnerイメージやツールチェーンのバージョンは推測で書かず、[actions/runner-images](https://github.com/actions/runner-images) などの公開情報で確認する。
 
+## エージェントのスキル
+
+- スキルは、複数のエージェントが読める `.agents/skills/<スキル名>/SKILL.md` に置く。
+- Claude Code は `.claude/skills/` しか読まないため、`.claude/skills/<スキル名>` から `.agents/skills/<スキル名>` へのシンボリックリンクを作る（`ln -s ../../.agents/skills/<スキル名> .claude/skills/<スキル名>`）。スキルの本体を複製しない。
+
 ## よく使うコマンド
 
 ```sh

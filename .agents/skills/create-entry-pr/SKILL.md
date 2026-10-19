@@ -34,4 +34,4 @@ description: 技術同人誌への参加表明として、空コミットのド�
 ## うまくいかないとき
 
 - 対象リポジトリへの書き込み権限がないと、ブランチを作成できない。権限がない場合は、リポジトリの管理者に依頼するよう伝える。
-- Claude Code も使えない参加者には、GitHub の Actions タブから「Create Entry Pull-Request」ワークフローを実行する方法を案内する。
+- AI エージェントを使えない参加者には、GitHub の Actions タブから「Create Entry Pull-Request」ワークフローを実行する方法を案内する。
