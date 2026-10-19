@@ -2,6 +2,18 @@
 
 技術同人誌のテンプレートリポジトリです。新しい同人誌を作成するときは、このリポジトリを利用してください。
 
+## 参加表明
+
+進捗管理のため、参加者は空コミットのドラフト PR で参加を表明します。ローカルに執筆環境を用意しなくても、次のいずれかの方法で参加表明 PR を作成できます。
+
+- **GitHub Actions**: Actions タブの「Create Entry Pull-Request」ワークフローで「Run workflow」を実行します。表示名とひとことは任意です。
+- **Claude Code**: 「参加表明の PR を作って」と依頼するか、`/create-entry-pr` を実行します（[スキル](.claude/skills/create-entry-pr/SKILL.md)）。
+- **シェル**: GitHub CLI にログインした状態で `bash .github/scripts/create-entry-pr.sh --name "表示名" --message "ひとこと"` を実行します。
+
+ブランチ `entry/<GitHub ID>` に空コミットを作成し、タイトルが `[参加表明] 表示名 (@GitHub ID)` のドラフト PR を作成します。執筆を始めるときは、このブランチに原稿を追加してください。
+
+なお、GitHub Actions で PR を作成するには、リポジトリの Settings > Actions > General > Workflow permissions で「Allow GitHub Actions to create and approve pull requests」を有効にしてください。
+
 ## PDF の生成方法
 
 ```shell

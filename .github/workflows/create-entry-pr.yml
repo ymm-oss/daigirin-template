@@ -1,0 +1,53 @@
+# 参加表明用の空コミットのドラフト PR を作成する。
+# GitHub の Actions タブから「Run workflow」を実行すると、実行者の参加表明 PR が作成される。
+#
+# 注意:
+#   リポジトリの Settings > Actions > General > Workflow permissions で
+#   「Allow GitHub Actions to create and approve pull requests」を有効にする必要がある。
+
+name: Create Entry Pull-Request
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: '表示名（任意。PR のタイトルと本文に記載されます）'
+        required: false
+        type: string
+      message:
+        description: 'ひとこと（任意。PR の本文に記載されます）'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create-entry-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      # スクリプトのみをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+
+      # 実行者の参加表明 PR を作成する
+      - name: Create entry PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BASE: ${{ github.event.repository.default_branch }}
+          LOGIN: ${{ github.actor }}
+          NAME: ${{ inputs.name }}
+          MESSAGE: ${{ inputs.message }}
+        run: |
+          bash .github/scripts/create-entry-pr.sh \
+            --repo "$REPO" \
+            --base "$BASE" \
+            --login "$LOGIN" \
+            --name "$NAME" \
+            --message "$MESSAGE"
