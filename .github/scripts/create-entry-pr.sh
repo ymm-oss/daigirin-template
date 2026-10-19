@@ -41,10 +41,10 @@ fi
 BRANCH="entry/${LOGIN}"
 
 if [ -n "$NAME" ]; then
-  TITLE="[参加表明] ${NAME} (@${LOGIN})"
+  TITLE="[エントリー] ${NAME} (@${LOGIN})"
   WHO="@${LOGIN}（${NAME}）"
 else
-  TITLE="[参加表明] @${LOGIN}"
+  TITLE="[エントリー] @${LOGIN}"
   WHO="@${LOGIN}"
 fi
 
@@ -75,7 +75,7 @@ gh api "repos/${REPO}/git/refs" \
 BODY=$(cat <<EOF
 ## 参加表明
 
-${WHO} は、本書への参加を表明します。
+${WHO} は、執筆に参加します。
 
 ## ひとこと
 
