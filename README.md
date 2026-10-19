@@ -10,7 +10,7 @@
 - **AI コーディングエージェント（Claude Code や Codex など）**: 「参加表明の PR を作って」と依頼します。Claude Code では `/create-entry-pr` でも実行できます（[スキル](.claude/skills/create-entry-pr/SKILL.md)）。
 - **シェル**: GitHub CLI にログインした状態で `bash .github/scripts/create-entry-pr.sh --name "表示名" --message "ひとこと"` を実行します。
 
-ブランチ `entry/<GitHub ID>` に空コミットを作成し、タイトルが `[参加表明] 表示名 (@GitHub ID)` のドラフト PR を作成します。執筆を始めるときは、このブランチに原稿を追加してください。
+ブランチ `entry/<GitHub ID>` に空コミットを作成し、タイトルが `[エントリー] 表示名 (@GitHub ID)` のドラフト PR を作成します。執筆を始めるときは、このブランチに原稿を追加してください。
 
 なお、GitHub Actions で PR を作成するには、リポジトリの Settings > Actions > General > Workflow permissions で「Allow GitHub Actions to create and approve pull requests」を有効にしてください。
 
