@@ -6,6 +6,8 @@ module.exports = {
   language: 'ja',
   size: 'A5',
   theme: [
+    '@vivliostyle/theme-base@2.1.1',      // 大技林テーマが 3.0.0 に対応したら削除してください。
+    '@vivliostyle/theme-techbook@2.0.2',  // 大技林テーマが 3.0.0 に対応したら削除してください。
     'vivliostyle-theme-macneko-techbook@0.5.0',
     '@mitsuharu/vivliostyle-theme-noto-sans-jp@0.1.4',
     'theme/theme-custom',
