@@ -38,7 +38,8 @@ if [ -z "$LOGIN" ]; then
   LOGIN=$(gh api user --jq .login)
 fi
 
-# PR を閉じてもブランチは残るため、日時を付けて毎回別のブランチにする。
+# 一人で複数の記事を書く場合があり、また PR を閉じてもブランチは残るため、日時を付けて毎回別のブランチにする。
+# 同じ参加者のオープンな PR があっても重複とはみなさず、新しい PR を作成する。
 # entry/<ID>/<日時> にすると、既存の entry/<ID> ブランチと Git の ref として共存できないため、ハイフンでつなぐ。
 BRANCH="entry/${LOGIN}-$(TZ=Asia/Tokyo date +%Y%m%d-%H%M%S)"
 
@@ -48,16 +49,6 @@ if [ -n "$NAME" ]; then
 else
   TITLE="[エントリー] @${LOGIN}"
   WHO="@${LOGIN}"
-fi
-
-# 同じ参加者のオープンな参加表明 PR がある場合は、その PR を案内して終了する。
-# 前方一致だと、ID が foo のときに foo-bar の PR まで一致するため、日時の形式まで正規表現で確かめる。
-# 日時を付ける前の形式（entry/<ID>）のブランチも対象にする。
-EXISTING_PR=$(gh pr list --repo "$REPO" --state open --limit 200 --json url,headRefName \
-  --jq "map(select(.headRefName | test(\"^entry/${LOGIN}(-[0-9]{8}-[0-9]{6})?\$\"))) | .[0].url // empty")
-if [ -n "$EXISTING_PR" ]; then
-  echo "${WHO} の参加表明 PR はすでに存在します: ${EXISTING_PR}"
-  exit 0
 fi
 
 # ベースブランチの最新コミットと同じツリーを持つ空コミットを作成する
